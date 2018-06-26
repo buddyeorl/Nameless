@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Bungee+Shade|Calligraffitti|Itim|Satisfy" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+
+  <title>What the Fork!</title>
+</head>
+
+<body>
+  <!--================================ NAV BAR STARTS HERE ================================-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="assets/img/cameraIcon.png" width="30" height="30" alt="">
+    <a class="navbar-brand" href="#">WTF</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home.html">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Which APIs?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Documentation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tech Talk</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="button" style="width:75px" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <!--================================ NAV BAR ENDS HERE ===================================-->
+
+  <!--================================ HEADER STARTS HERE ================================-->
+  <center>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-3" style="font-family: 'Bungee Shade', cursive;">
+          <img src="assets/img/cameraIcon.png" width="75" height="75" alt="">What the Fork!</h1>
+        <p class="lead" style="font-family: 'Calligraffitti', cursive; font-size: 200%;">The World's leading Recipe Finder!</p>
+      </div>
+    </div>
+  </center>
+  <!--================================ HEADER ENDS HERE ==================================-->
+
+  <!--================================ CONTAINER STARTS HERE ================================-->
+  <div class="container mediaQuery col-md-6">
+    <div class="row holderRecipe">
+      <!--================================ UPLOADING AND LOADING AREA STARTS HERE ================================-->
+      <div class="col-md-12">
+        <center>
+          <article id="drop_zone" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" ondragend="dragend_handler(event);"
+            ondragleave="dragleave_handler(event);">
+            <div class="hideOnMobileDiv p-0" id="holder">
+              <p id="dragLabel">Drag Drop Your Image Here or Click on the camera to take a picture</p>
+              <!-- ======================================================================== -->
+              <!-- =======================camera capture starts here======================= -->
+              <video id="player" poster="assets/img/cameraIcon.png" autoplay width=40% height=40%></video>
+              <div id="hiddeableCamera" style="background-size: 100% 100%; background-image: url(assets/img/cameraIcon.png); width:30%; height:30%; "></div>
+              <canvas id="canvas" width=100% height=100%></canvas>
+              <!-- =======================camera capture ends here======================= -->
+              <!-- ====================================================================== -->
+            </div>
+            <!-- <img id="blah" src="assets/img/wtf-logo-neutrals.png" alt="" /> this line was used before below camera, it was changed after 12/27/2017   -->
+            <p id="upload" class="hidden">
+              <label>Drag drop not supported, but you can still upload via this input field:
+                <br>
+                <input type="file">
+              </label>
+            </p>
+            <p id="filereader">File API FileReader API not supported</p>
+            <p id="formdata">XHR2's FormData is not supported</p>
+            <p id="progress">XHR2's upload progress isn't supported</p>
+            <!-- ================================================================= -->
+            <!-- VERY IMPORTANT DONT EDIT THIS BUTTON  BECAUSE IT WILL UPLOAD ITEMS TO IMGUR -->
+
+            <div class="row desktop mt-5 mb-5">
+              <div class="col-sm-3">
+                <button id="openCamera" class="btn btn-dark btn-lg btn-block m-2" data-toggle="tooltip" data-placement="top" title="Click to open the Camera">Open Camera</button>
+              </div>
+              <div class="col-sm-3">
+                <button id="capture" data-toggle="tooltip" data-placement="top" title="Click to take a picture"></button>
+              </div>
+              <div class="col-sm-3">
+                <form id="imgur">
+                  <input id="inputFile" type="file" class="imgur" accept="image/*" data-max-size="5000" onchange="readURL(this);" data-toggle="tooltip"
+                    data-placement="top" title="Click to upload a picture" />
+                </form>
+              </div>
+              <div class="col-sm-3">
+                <button class="btn btn-warning btn-lg btn-block m-2" id="refreshbutton" data-toggle="tooltip" data-placement="top" title="Click to Reset All">Reset All!</button>
+              </div>
+            </div>
+
+            <div class="row mobile mt-5 mb-5">
+              <div class="col-sm-6">
+                <form id="imgur">
+                  <input id="inputFile" type="file" class="imgur" accept="image/*" data-max-size="5000" onchange="readURL(this);" />
+                </form>
+              </div>
+              <div class="col-sm-12">
+                <button class="btn btn-warning btn-lg btn-block m-2" id="refreshbutton">Reset All!</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <img id="loadingImage" src="assets/img/loadingIcon.gif" alt="" />
+              </div>
+            </div>
+            <!-- END OF VERY IMPORTANT IMGUR BUTTON-->
+            <!-- ================================================================= -->
+          </article>
+        </center>
+      </div>
+      <!--================================ UPLOADING AND LOADING AREA ENDS HERE ================================-->
+
+      <!--================================ DYNAMICALLY CREATED BUTTONS AREA STARTS HERE ================================-->
+      <div class="container-fluid col-lg-12 holderRecipe">
+        <div class="row m-12" id="possibleResults">
+          <!-- <div class="col-md-12"><p><h1>Below is a list of possible matches for your image, please click on "i" to get its infomation and "+" to add it to the recipe list</h1></p></div> -->
+          <!--================================ WIKIPEDIA PANEL STARTS HERE ==================================-->
+          <div class="container col-md-6 col-md-offset-2 wikipedia">
+            <!-- ******ROW-02: (Wikipedia Information panel)****** -->
+            <div class="row">
+              <div class="recipeDisplay panel panel-info">
+                <div class="panel-heading">
+                  <em>Let's get acquainted</em>
+                </div>
+                <div class="panel-body" id="ingredientInfo"></div>
+              </div>
+            </div>
+          </div>
+          <!--================================ WIKIPEDIA PANEL ENDS HERE ==================================-->
+        </div>
+
+        <div class="row m-12 list-group" id="ingredientList">
+          <a class="list-group-item list-group-item-action active">
+            <h1>Ingredient's List</h1>
+          </a>
+          <div class="alert alert-primary searchRecipeButton align-self-center m-3" role="alert" style="text-align:center">
+            <b>Click to search a recipe</b>
+            <button id="searchRecipe"></button>
+          </div>
+        </div>
+      </div>
+      <!--================================ DYNAMICALLY CREATED BUTTONS AREA ENDS HERE ==================================-->
+
+
+      <div class="container-fluid col-lg-12 holderRecipe wikipediaYummly">
+
+
+        <!--================================ YUMMLY PANEL STARTS HERE ==================================-->
+        <div class="row" id="yummlyIngredientList"></div>
+        <!--================================ YUMMLY PANEL ENDS HERE ==================================-->
+      </div>
+    </div>
+  </div>
+  <!--================================ CONTAINER ENDS HERE ================================-->
+
+  <!--================================ SCRIPTS STARTS HERE ================================-->
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- Popper -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <!-- logic -->
+  <script src="assets/js/logic.js"></script>
+  <!--================================ SCRIPTS ENDS HERE ================================-->
+</body>
+
+</html>
