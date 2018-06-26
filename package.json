@@ -1,0 +1,33 @@
+{
+  "name": "whatthefork",
+  "version": "1.0.0",
+  "description": "App to recognize food and display information and recipes related.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buddyeorl/WhatTheFork.git"
+  },
+  "keywords": [
+    "Visual",
+    "Recognition",
+    "Yummly",
+    "Wikipedia",
+    "Watson",
+    "buddyeorl",
+    "Alexander",
+    "Lizarraga"
+  ],
+  "author": "what the fork team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/buddyeorl/WhatTheFork/issues"
+  },
+  "homepage": "https://github.com/buddyeorl/WhatTheFork#readme",
+  "dependencies": {
+    "firebase": "^5.1.0",
+    "watson-developer-cloud": "^3.5.1"
+  }
+}
