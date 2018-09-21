@@ -64,7 +64,7 @@ module.exports = function (app) {
 		var fs = require('fs');
 
 		var params = {
-			parameters: { 'url': images, 'classifier_ids': ["Buddhaxshand_1013586818", "default"] }
+			parameters: { 'url': images }
 		};
 
 
