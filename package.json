@@ -31,6 +31,6 @@
     "express": "^4.16.3",
     "firebase": "^5.1.0",
     "path": "^0.12.7",
-    "watson-developer-cloud": "^3.5.1"
+    "watson-developer-cloud": "^3.12.0"
   }
 }
